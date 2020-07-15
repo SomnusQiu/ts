@@ -31,3 +31,55 @@ class husky extends Dog{
 }
 
 console.log(husky.food)//静态成员可以继承
+
+//抽象类
+abstract class Aninmal {
+    eat(){
+        console.log('eat')
+    }
+    abstract sleep():void //抽象方法 不指名具体的实现
+}
+
+class Dog1 extends Aninmal{
+    constructor(name:string){
+        super()
+        this.name = name
+    }
+    name : string
+    run(){}
+    sleep(){
+        console.log('dog sleep')
+    }
+}
+
+let dog1 = new Dog1('wangwang')
+
+class Cat extends Aninmal{
+    sleep(){
+        console.log('cat sleep')
+    }
+}
+
+let cat = new Cat()
+let animals :Aninmal[]= [dog1,cat]
+animals.forEach(i=>{
+    i.sleep()
+})
+
+//特殊ts 类型 this 方便实现链式调用
+class WorkFlow {
+    step1(){
+        return this;
+    }
+    step2(){
+        return this;
+    }
+}
+new WorkFlow().step1().step2()
+
+class MyFlow extends WorkFlow{
+    next(){
+        return this;
+    }
+}
+new MyFlow().next().step1().next().step2()
